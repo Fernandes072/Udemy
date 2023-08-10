@@ -12,7 +12,10 @@ public class Reserva {
 	private Date checkin;
 	private Date checkout;
 
-	public Reserva(Integer numeroQuarto, Date checkin, Date checkout) {
+	public Reserva(Integer numeroQuarto, Date checkin, Date checkout){
+		if (checkin.before(checkout)) {
+			throw new Excecao("Erro: Data de checkout deve ser depois da checkin");
+		}
 		this.numeroQuarto = numeroQuarto;
 		this.checkin = checkin;
 		this.checkout = checkout;
@@ -23,17 +26,16 @@ public class Reserva {
 		return TimeUnit.DAYS.convert(diferenca, TimeUnit.MILLISECONDS);
 	}
 
-	public String atualizarDatas(Date checkin, Date checkout) {
+	public void atualizarDatas(Date checkin, Date checkout){
 		Date agora = new Date();
 		if (checkin.after(agora) || checkout.after(agora)) {
-			return "Erro: Data  de atualização deve ser futura";
+			throw new Excecao("Erro: Data  de atualização deve ser futura");
 		}
 		if (checkin.before(checkout)) {
-			return "Erro: Data de checkout deve ser depois da checkin";
+			throw new Excecao("Erro: Data de checkout deve ser depois da checkin");
 		}
 		this.checkin = checkin;
 		this.checkout = checkout;
-		return null;
 	}
 
 	public Integer getNumeroQuarto() {
