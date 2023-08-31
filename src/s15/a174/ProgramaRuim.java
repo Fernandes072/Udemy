@@ -29,7 +29,8 @@ public class ProgramaRuim {
 			System.out.print("Data checkout (dd/mm/yyyy): ");
 			checkout = sdf.parse(ler.next());
 
-			String erro = res1.atualizarDatas(checkin, checkout);
+			//String erro = res1.atualizarDatas(checkin, checkout);
+			String erro = "abc";
 			if (erro != null) {
 				System.out.println(erro);
 			}
